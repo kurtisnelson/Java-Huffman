@@ -16,8 +16,8 @@ import java.util.Stack;
  * @param <K> Type to encode
  */
 public class EncodingMap<K extends Comparable<?>> {
-	private HashMap<K, Encoding> map;
-	private HashMap<Encoding, K> invertedMap;
+	private final HashMap<K, Encoding> map;
+	private final HashMap<Encoding, K> invertedMap;
 	private ArrayList<K> seed;
 
 	/**
@@ -29,6 +29,11 @@ public class EncodingMap<K extends Comparable<?>> {
 		this.seed.addAll(seed);
 		Collections.sort(this.seed, new KeyCompare());
 		map = makeTreeMap(this.seed);
+		invertedMap = invertMap(map);
+	}
+	
+	public EncodingMap(HashMap<K, Encoding> map){
+		this.map = map;
 		invertedMap = invertMap(map);
 	}
 	
