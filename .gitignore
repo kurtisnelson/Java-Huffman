@@ -1,0 +1,10 @@
+dist/
+apidoc/
+bin/
+*.log
+*.conf
+*.class
+.settings
+.project
+.classpath
+/build
