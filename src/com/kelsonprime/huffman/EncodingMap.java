@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 /**
@@ -98,21 +99,19 @@ public class EncodingMap<K extends Comparable<?>> {
 	private HashMap<K, Encoding> makeTreeMap(ArrayList<K> seed) {
 		LinkedHashSet<K> set = new LinkedHashSet<K>();
 		set.addAll(seed);
-		ArrayList<HuffNode<K>> nodes = new ArrayList<HuffNode<K>>(set.size());
+		PriorityQueue<HuffNode<K>> nodes = new PriorityQueue<HuffNode<K>>(set.size());
 		for (K c : set) {
 			nodes.add(new HuffNode<K>(c, Collections.frequency(seed, c)));
 		}
-		Collections.sort(nodes);
 		while (nodes.size() > 1) {
-			HuffNode<K> c1 = nodes.remove(0);
-			HuffNode<K> c2 = nodes.remove(0);
+			HuffNode<K> c1 = nodes.poll();
+			HuffNode<K> c2 = nodes.poll();
 			HuffNode<K> parent = new HuffNode<K>(null, c1.getScore() + c2.getScore());
 			parent.left = c1;
 			parent.right = c2;
 			nodes.add(parent);
-			Collections.sort(nodes);
 		}
-		HuffNode<K> root = nodes.remove(0);
+		HuffNode<K> root = nodes.poll();
 		nodes = null;
 		System.gc(); //We've just made a massive mess, so recommend cleaning things up.
 		
