@@ -43,10 +43,10 @@ public class HuffmanRunner {
 	 * @return converted String
 	 */
 	public static String charactersToString(List<Character> chars) {
-		String ret = "";
+		StringBuilder sb = new StringBuilder();
 		for (char c : chars)
-			ret += c;
-		return ret;
+			sb.append(c);
+		return sb.toString();
 	}
 
 }

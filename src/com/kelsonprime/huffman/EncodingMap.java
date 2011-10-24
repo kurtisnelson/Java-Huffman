@@ -154,11 +154,14 @@ public class EncodingMap<K extends Comparable<?>> {
 	 * @return ASCII table
 	 */
 	public String mapToString(){
-		String s = "Key -> Encoding\n";
+		StringBuilder sb = new StringBuilder("Key -> Encoding\n");
 		for(Entry<K, Encoding> e : map.entrySet()){
-			s += e.getKey() + " <-> " + e.getValue() + "\n";
+			sb.append(e.getKey());
+			sb.append(" <-> ");
+			sb.append(e.getValue());
+			sb.append('\n');
 		}
-		return s;
+		return sb.toString();
 	}
 	
 	/**
@@ -166,11 +169,14 @@ public class EncodingMap<K extends Comparable<?>> {
 	 * @return ASCII table
 	 */
 	public String invertedToString(){
-		String s = "Encoding -> Key\n";
+		StringBuilder sb = new StringBuilder("Encoding -> Key\n");
 		for(Entry<Encoding, K> e : invertedMap.entrySet()){
-			s += e.getKey() + " <-> " + e.getValue() + "\n";
+			sb.append(e.getKey());
+			sb.append(" <-> ");
+			sb.append(e.getValue());
+			sb.append('\n');
 		}
-		return s;
+		return sb.toString();
 	}
 	
 	/**

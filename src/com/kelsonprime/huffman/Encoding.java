@@ -7,10 +7,7 @@ import java.util.List;
 public class Encoding implements Comparable<Object>{
 	private List<Boolean> data;
 	public Encoding(List<Boolean> path){
-		data = new LinkedList<Boolean>();
-		for(Boolean b : path){
-			data.add(b);
-		}
+		data = new LinkedList<Boolean>(path);
 	}
 	public Encoding(String path){
 		data = new LinkedList<Boolean>();
@@ -23,22 +20,22 @@ public class Encoding implements Comparable<Object>{
 	}
 	
 	public String toString(){
-		String s = "";
+		StringBuilder sb = new StringBuilder();
 		for(boolean b : data){
 			if(b)
-				s = s + '1';
+				sb.append('1');
 			else
-				s = s + '0';
+				sb.append('0');
 		}
-		return s;
+		return sb.toString();
 	}
 	
 	public static String toString(Encoding[] enc){
-		String ret = "";
+		StringBuilder sb = new StringBuilder();
 		for(Encoding e : enc){
-			ret += e;
+			sb.append(e);
 		}
-		return ret;
+		return sb.toString();
 	}
 	
 	public int hashCode(){

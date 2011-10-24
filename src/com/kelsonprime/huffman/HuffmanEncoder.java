@@ -56,19 +56,19 @@ public class HuffmanEncoder<K extends Comparable<?>> {
 	 */
 	public List<K> decode(String enc) {
 		List<K> ret = new ArrayList<K>();
-		String buffer = "";
+		StringBuilder sb = new StringBuilder();
 		int pointer = 0;
 		char[] charr = enc.toCharArray();
 		while (pointer < charr.length) {
-			buffer += charr[pointer];
-			Encoding test = new Encoding(buffer);
+			sb.append(charr[pointer]);
+			Encoding test = new Encoding(sb.toString());
 			if (map.isEncoding(test)) {
 				ret.add(map.getDecoded(test));
-				buffer = "";
+				sb = new StringBuilder();
 			}
 			pointer++;
 		}
-		if (buffer.length() > 0)
+		if (sb.length() > 0)
 			throw new RuntimeException("Invalid input");
 		return ret;
 	}
